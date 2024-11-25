@@ -1,0 +1,9 @@
+<aspectj>
+    <aspects>
+        <aspect name="ua.kpi.ipze.messaging.service.InboxProxyAspect"/>
+    </aspects>
+    <weaver options="-verbose -showWeaveInfo">
+        <!-- Apply the aspect to all subclasses of MessageReceiver -->
+        <include within="ua.kpi.ipze.messaging.api.MessageReceiver+"/>
+    </weaver>
+</aspectj>
