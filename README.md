@@ -1,4 +1,4 @@
-# Stable message library
+# Stable messaging library
 
 This library implements Transactional Outbox and Transactional Inbox patterns, to provide stable messaging between distributed systems.
 
@@ -32,4 +32,4 @@ This library implements Transactional Outbox and Transactional Inbox patterns, t
 `);`
 
 7) Implement `MessageReceiver` successors for each queue receiver. Don't forget to include it in `StableMessageConfigurerBuilder.messageReceiver()`.
-8) Implement `Message sender` to provide an instrumet for the library, for sending messages properly for desired message broker. Don't forget to include it in `StableMessageConfigurerBuilder.messageSender()`.
+8) Implement `Message sender` to provide an instrument for the library, for sending messages properly for desired message broker. Don't forget to include it in `StableMessageConfigurerBuilder.messageSender()`.
