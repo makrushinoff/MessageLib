@@ -13,6 +13,10 @@ import java.time.temporal.TemporalUnit;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Responsible for configuration of library functions. Use {@link StableMessagingConfigurer#configure()}
+ * static method to create {@link StableMessagingConfigurerBuilder} instance, which has handy interface for the configuration.
+ */
 public class StableMessagingConfigurer {
 
     public record RetentionPolicy(Long time, TemporalUnit temporalUnit) {}
@@ -51,21 +55,42 @@ public class StableMessagingConfigurer {
             return this;
         }
 
+        /**
+         * Defines how many messages at once is needed to handle by scheduled jobs
+         *
+         * @param messageFetchAmount amount of messages which will be fetched from DB and handled
+         */
         public StableMessagingConfigurerBuilder messageFetchAmount(int messageFetchAmount) {
             this.messageFetchAmount = messageFetchAmount;
             return this;
         }
 
+        /**
+         * Registers listeners for messages for a specific queue
+         *
+         * @param queueName queue name to receive message
+         * @param messageReceiver object, which has to handle messages from specified queue
+         */
         public StableMessagingConfigurerBuilder messageReceiver(String queueName, MessageReceiver messageReceiver) {
             messageReceivers.put(queueName, messageReceiver);
             return this;
         }
 
+        /**
+         * Defines has often messages will be sent to message broker, and how often messages will be handled, when they are received.
+         *
+         * @param frequency interval in seconds between handling of scheduled jobs.
+         */
         public StableMessagingConfigurerBuilder frequency(Long frequency) {
             this.frequency = frequency;
             return this;
         }
 
+        /**
+         * Defines how much time stored messages in <i>outbox</i> and <i>inbox</i> tables is needed to save.
+         *
+         * @param retentionPolicy time interval with time units to specify
+         */
         public StableMessagingConfigurerBuilder retentionPolicy(RetentionPolicy retentionPolicy) {
             this.retentionPolicy = retentionPolicy;
             return this;
